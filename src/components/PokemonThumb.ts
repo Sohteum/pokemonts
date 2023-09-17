@@ -15,14 +15,7 @@ const PokemonThumb = ({ id, image, name, type, _callback, allPokemons }) => {
                 <span>Type: {type}</span>
             </div>
             <div className="all-container">
-                {/* {allPokemons.map( ( index) => 
-     
-              key={index}
-              image={pokemonStats.sprites.other.dream_world.front_default}
-              id={pokemonStats.id}
-              name={pokemonStats.name}
-              type={pokemonStats.types[0].type.name}
-            />)} */}
+             
 
             </div>
         </div>
