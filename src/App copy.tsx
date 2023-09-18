@@ -6,16 +6,16 @@ import axios from 'axios';
 
 //헝가리안표기법 : I를 붙이는
 
-interface Iresults {
-  id : any,
-  name: any,
-  url: any
+interface Iuser {
+  id: number,
+  name: string,
+  phone: string
 }
 
 
 function App() {
 
-  const [results, setResults] = useState<Iresults[]>([]);
+  const [users, setUsers] = useState<Iuser[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -25,13 +25,13 @@ function App() {
       try {
         // 요청이 시작 할 때에는 error 와 users 를 초기화하고
         setError(null);
-        setResults([]);
+        setUsers([]);
         // loading 상태를 true 로 바꿉니다.
         setLoading(true);
         const response = await axios.get(
-          `https://pokeapi.co/api/v2/pokemon`
+          'https://jsonplaceholder.typicode.com/users'
         );
-        setResults(response.data); // 데이터는 response.data 안에 들어있습니다.
+        setUsers(response.data); // 데이터는 response.data 안에 들어있습니다.
       } catch (e: any) {
         setError(e);
       }
@@ -41,40 +41,27 @@ function App() {
     fetchUsers();
   }, []);
 
+  //   type map = new Map<any, string[]>([]);
+  // type mapWithType = new Map<string, any[]>();
 
-  console.log(results)
+  console.log(users)
 
 
   if (loading) return <div>로딩중..</div>;
   if (error) return <div>에러가 발생했습니다</div>;
-  if (!results) return null;
+  if (!users) return null;
 
   return (
-    < >
+    <ul>
 
-    
- 
-          {results.map((results: any, index:any) => (
-            <div key={index}>
-            {results}
-            </div>
-          ))}
- 
-  
-    </>
+      {users.map((user: any) => (
+        <li key={user.id}>
+          {user.username} ({user.name})
+        </li>
+      ))}
+    </ul>
   );
 }
 
 
 export default App;
-
-// {pokemonData.map((pokemon: Pokemon, index: number) => (
-//   <li key={index}>
-//     <PokemonItem
-//       id={pokemon.id}
-//       name={pokemon.name}
-//       sprites={pokemon.sprites}
-//       types={pokemon.types}
-//     />
-//   </li>
-// ))}
