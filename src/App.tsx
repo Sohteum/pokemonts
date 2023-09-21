@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./css/style.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { useRecoilState } from "recoil";
-import { LoginStateAtom } from "./atom/atom";
+
 
 //헝가리안표기법 : I를 붙이는
 
@@ -19,7 +18,6 @@ function App() {
   const navigate = useNavigate();
 
 
-  const [IsLogged, setIsLogged] = useRecoilState(LoginStateAtom);
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -39,6 +37,11 @@ function App() {
 
     fetchUsers();
   }, []);
+
+
+
+
+
 
   if (loading) return <div>로딩중..</div>;
   if (error) return <div>에러가 발생했습니다</div>;

@@ -4,6 +4,7 @@ import {  createBrowserRouter, RouterProvider } from 'react-router-dom';
 import App from './App';
 import PokeDetails from './components/PokeDetails';
 import { RecoilRoot } from 'recoil';
+import LoginPage from './components/LoginPage';
 
 const router = createBrowserRouter([
   {
@@ -13,6 +14,10 @@ const router = createBrowserRouter([
   {
     path: "/PokeDetails",
     element: <PokeDetails />
+  },
+  {
+    path: "/login",
+    element: <LoginPage />
   }
 
 ]);
