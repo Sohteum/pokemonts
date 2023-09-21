@@ -52,7 +52,7 @@ function App() {
     <div onClick={() => { navigate('/PokeDetails') }}>
       {results.map((i: any, index: number) => (
         <div key={index}>
-          {i.name}
+          {i.name} 
         </div>
       ))}
 
