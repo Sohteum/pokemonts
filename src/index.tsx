@@ -5,11 +5,18 @@ import App from './App';
 import PokeDetails from './components/PokeDetails';
 import { RecoilRoot } from 'recoil';
 import LoginPage from './components/LoginPage';
+import "./css/style.css";
+import "./css/login.css";
+import CompHeader from './components/CompHeader';
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />
+  },
+  {
+    path: "/header",
+    element: <CompHeader />
   },
   {
     path: "/PokeDetails",

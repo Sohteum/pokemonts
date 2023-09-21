@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
-import "./css/style.css";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
 
+import axios from "axios";
+import {   useNavigate } from "react-router-dom";
+import CompHeader from "./components/CompHeader";
+import { AppContext } from "./components/LoginPage";
 
 //헝가리안표기법 : I를 붙이는
 
@@ -11,13 +12,25 @@ interface Iresults {
   url: string;
 }
 
+const SetUser = ()=>{
+  let user = localStorage.getItem('localStorageUser')
+
+  if(user){
+    return JSON.parse(user)
+  }else{
+    return null
+  }
+
+}
+
+
 function App() {
+
+  const {id} = useContext(AppContext)
   const [results, setResults] = useState<Iresults[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
-
-
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -38,33 +51,39 @@ function App() {
     fetchUsers();
   }, []);
 
-
-
-
-
-
   if (loading) return <div>로딩중..</div>;
   if (error) return <div>에러가 발생했습니다</div>;
   if (!results) return null;
 
   return (
-    <div>
+    <div className="pokemon-container">
+
       <header>
         <h1>Pokemon Evolution</h1>
+        <CompHeader/>
+        {/* <button
+          className="login"
+          onClick={() => {
+            navigate("/login");
+          }}
+        >
+          login
+        </button> */}
       </header>
-      <button
-            className="login"
-            onClick={() => {
-              navigate("/login");
-            }}
-          >login</button>
       <div
+        className="all-container"
         onClick={() => {
           navigate("/PokeDetails");
         }}
       >
         {results.map((i: any, index: number) => (
-          <div key={index}>{i.name}</div>
+          <div className="thumb-container" key={(index)}>
+            {i.name}
+            {/* image={i.sprites.other.dream_world.front_default}
+            id={i.id}
+            type={i.types[0].type.name} */}
+          </div>
+         
         ))}
       </div>
     </div>
@@ -72,3 +91,6 @@ function App() {
 }
 
 export default App;
+
+//1. 이미지, 아이디, 타입 출력
+//2. 컴포넌트 만들어서 이동
