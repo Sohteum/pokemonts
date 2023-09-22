@@ -1,41 +1,40 @@
-import React  { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
-const PokeDetails = () => {
+const PokeDetails = ({url}:{url:any}) => {
+//   const [pokemonData, setPokemonData] = useState({});
+//   const [loading, setLoading] = useState(true);
 
-  // const getData = async () => {
-  //   // 초기 데이터 배열 가져오기
-  //   try {
-  //     const result = await Axios.get(
-  //       "https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0"
-  //     );
-  //     setData(result.data);
-  //   } catch (e) {
-  //     console.log("error", e);
-  //   }
-  // };
-  const [data, setData] = useState();
+//   useEffect(() => {
+//     axios
+//       .get(url)
+//       .then((response) => {
+//         setPokemonData({
+//           name: response.data.name,
+//           type: response.data.types[0].type.name,
+//           image: response.data.sprites.front_default,
+//           id: response.data.id,
+//         });
+//         setLoading(false);
+//       })
+//       .catch((error) => {
+//         console.error("Error fetching Pokemon details:", error);
+//         setLoading(false);
+//       });
+//   }, [url]);
 
-  function Details(){
-      
-      useEffect(() => {
-      const fetchData = async() => {
-            const res = await fetch('https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0');
-            const result = res.json();
-            return result;
-          }	
-          
-          fetchData().then(res => setData(res));
-      }, []);
+//   if (loading) return <li>Loading...</li>;
 
-    }
-
-
-  return (
-    <div>
- dfdfdfdf
-    </div>
-  );
-};
+//   return (
+//     <li>
+//       {/* <h2>{pokemonData.name}</h2>
+//       <p>Type: {pokemonData.type}</p>
+//       <p>ID: {pokemonData.id}</p>
+//       <img src={pokemonData.image} alt={pokemonData.name} /> */}
+//     </li>
+//   );
+// };
+}
 
 export default PokeDetails;
 
