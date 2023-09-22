@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import {   useNavigate } from "react-router-dom";
-import CompHeader from "./components/CompHeader";
+// import CompHeader from "./components/CompHeader";
 
 //헝가리안표기법 : I를 붙이는
 
@@ -12,21 +12,20 @@ interface Iresults {
   url: string;
 }
 
-const SetUser = ()=>{
-  let user = localStorage.getItem('localStorageUser')
+// const SetUser = ()=>{
+//   let user = localStorage.getItem('localStorageUser')
 
-  if(user){
-    return JSON.parse(user)
-  }else{
-    return null
-  }
+//   if(user){
+//     return JSON.parse(user)
+//   }else{
+//     return null
+//   }
 
-}
+// }
 
 
 function App() {
 
-  const {id} = useContext(AppContext)
   const [results, setResults] = useState<Iresults[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);

@@ -13,7 +13,6 @@ const LoginPage = () => {
 
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
-  const navigate = useNavigate();
 
   const onSigninHandler = (e: any) => {
     e.prevent.default();
@@ -31,7 +30,7 @@ const LoginPage = () => {
             alt="logo img"
           />
         </div>
-        <p className="email">Email</p>
+        <p className="text">Email</p>
         <p>
           <input
             className="input"
