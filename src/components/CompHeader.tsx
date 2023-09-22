@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
-import { AppContext } from "./LoginPage";
 import { Link } from "react-router-dom";
+import { AppContext } from "../App";
 
 const CompHeader = () => {
   const { id } = useContext(AppContext);

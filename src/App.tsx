@@ -1,11 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
-
 import axios from "axios";
 import {   useNavigate } from "react-router-dom";
 import CompHeader from "./components/CompHeader";
-import { AppContext } from "./components/LoginPage";
 
 //헝가리안표기법 : I를 붙이는
+
+export const AppContext = React.createContext<any>('')
 
 interface Iresults {
   name: string;
@@ -60,15 +60,15 @@ function App() {
 
       <header>
         <h1>Pokemon Evolution</h1>
-        <CompHeader/>
-        {/* <button
+        {/* <CompHeader/> */}
+        <button
           className="login"
           onClick={() => {
             navigate("/login");
           }}
         >
           login
-        </button> */}
+        </button>
       </header>
       <div
         className="all-container"

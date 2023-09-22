@@ -2,7 +2,6 @@ import React, {   useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 
-export const AppContext = React.createContext<any>('')
 
 const LoginPage = () => {
   // const [IsLogged, setIsLogged] = useRecoilState(LoginStateAtom);
@@ -24,14 +23,14 @@ const LoginPage = () => {
 
 
   return (
-    <AppContext.Provider value={{id}}>
     <div className="loginPage">
       <form className="loginForm" onSubmit={onSigninHandler}>
-        <img
-          className="logImg"
-          src={require("../../src/img/logo.png").default}
-          alt="logo img"
-        />
+        <div className="logoImg">
+          <img
+            src={process.env.PUBLIC_URL+"/logo.png"}
+            alt="logo img"
+          />
+        </div>
         <p className="email">Email</p>
         <p>
           <input
@@ -59,7 +58,6 @@ const LoginPage = () => {
         <button className="signin" type="submit">login</button>
       </form>
     </div>
-    </AppContext.Provider>
   );
 };
 
