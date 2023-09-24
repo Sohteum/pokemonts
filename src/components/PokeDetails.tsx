@@ -1,40 +1,53 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-const PokeDetails = ({url}:{url:any}) => {
-//   const [pokemonData, setPokemonData] = useState({});
-//   const [loading, setLoading] = useState(true);
+const PokeDetails = ({url}:{url:string}) => {
 
-//   useEffect(() => {
-//     axios
-//       .get(url)
-//       .then((response) => {
-//         setPokemonData({
-//           name: response.data.name,
-//           type: response.data.types[0].type.name,
-//           image: response.data.sprites.front_default,
-//           id: response.data.id,
-//         });
-//         setLoading(false);
-//       })
-//       .catch((error) => {
-//         console.error("Error fetching Pokemon details:", error);
-//         setLoading(false);
-//       });
-//   }, [url]);
+  // let PokemonData: pokemonData = {
+  //   name
+  // };
+  interface IpokemonData {
+    name: string;
+    type:string;
+    id:number;
+    image:string;
+  }
 
-//   if (loading) return <li>Loading...</li>;
+  const [data, setData] = useState<IpokemonData>(); // 스테이트에서 타입설정하기 확인
+  const [loading, setLoading] = useState<boolean>(true);
 
-//   return (
-//     <li>
-//       {/* <h2>{pokemonData.name}</h2>
-//       <p>Type: {pokemonData.type}</p>
-//       <p>ID: {pokemonData.id}</p>
-//       <img src={pokemonData.image} alt={pokemonData.name} /> */}
-//     </li>
-//   );
-// };
-}
+  useEffect(() => {
+    axios
+      .get(url)
+      .then((response) => {
+        setData({
+          name: response.data.name,
+          type: response.data.types[0].type.name,
+          image: response.data.sprites.front_default,
+          id: response.data.id,
+        });
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error fetching Pokemon details:", error);
+        setLoading(false);
+      });
+  }, [url]);
+
+  if (loading) return <li>Loading...</li>;
+
+  if(data == null) return <li>null Data...</li>;
+
+  return (
+    <li>
+      <h2>{data.name}</h2>
+      <p>Type: {data.type}</p>
+      <p>ID: {data.id}</p>
+      <img src={data.image} alt={data.name} /> 
+    </li>
+  );
+};
+
 
 export default PokeDetails;
 

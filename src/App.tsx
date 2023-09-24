@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import PokeDetails from "./components/PokeDetails";
+import { log } from "console";
 
 const App = () => {
   const [pokemonList, setPokemonList] = useState([]);
@@ -20,6 +21,7 @@ const App = () => {
         setLoading(false);
       });
   }, []);
+  console.log(pokemonList,'aa')
 
   if (loading) return <div>Loading...</div>;
 
@@ -27,8 +29,9 @@ const App = () => {
     <div>
       <h1>Pokemon List</h1>
       <ul>
-        {pokemonList.map((pokemon:any, index:any) => (
+        {pokemonList.map((pokemon:any, index:number) => (
           <PokeDetails key={index} url={pokemon.url} />
+          // pokemon.url
         ))}
       </ul>
     </div>

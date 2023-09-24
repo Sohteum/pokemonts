@@ -9,12 +9,9 @@ import "./css/login.css";
 import CompHeader from './components/CompHeader';
 import {
   RecoilRoot,
-  atom,
-  selector,
-  useRecoilState,
-  useRecoilValue,
+ 
 } from 'recoil'
-
+const url = 'sdf';
 const router = createBrowserRouter([
   {
     path: "/",
@@ -26,7 +23,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/PokeDetails",
-    element: <PokeDetails url={url}   />
+    element: <PokeDetails url={url} />
   },
   {
     path: "/login",
