@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import {  createBrowserRouter, RouterProvider } from 'react-router-dom';
 import App from './App';
-import PokeDetails from './components/PokeDetails';
 import LoginPage from './components/LoginPage';
 import "./css/style.css";
 import "./css/login.css";
@@ -11,7 +10,9 @@ import {
   RecoilRoot,
  
 } from 'recoil'
-const url = 'sdf';
+import PokeList from './components/PokeList';
+import PokeDetails from './components/PokeDetails';
+const url = 'sdf';//...?
 const router = createBrowserRouter([
   {
     path: "/",
@@ -22,12 +23,16 @@ const router = createBrowserRouter([
     element: <CompHeader />
   },
   {
-    path: "/PokeDetails",
-    element: <PokeDetails url={url} />
+    path: "/PokeList",
+    element: <PokeList url={url} />
   },
   {
     path: "/login",
     element: <LoginPage />
+  },
+  {
+    path: "/Details",
+    element: <PokeDetails />
   }
 
 ]);

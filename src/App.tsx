@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import PokeDetails from "./components/PokeDetails";
-import { log } from "console";
+import PokeList from "./components/PokeList";
+import { useNavigate } from "react-router-dom";
 
 const App = () => {
   const [pokemonList, setPokemonList] = useState([]);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate()
 
   useEffect(() => {
     const apiUrl = "https://pokeapi.co/api/v2/pokemon";
@@ -21,16 +22,25 @@ const App = () => {
         setLoading(false);
       });
   }, []);
-  console.log(pokemonList,'aa')
+  // console.log(pokemonList,'aa')
 
   if (loading) return <div>Loading...</div>;
 
   return (
-    <div>
-      <h1>Pokemon List</h1>
-      <ul>
-        {pokemonList.map((pokemon:any, index:number) => (
-          <PokeDetails key={index} url={pokemon.url} />
+    <div className="pokemon-container">
+     <header>
+        <h1>Pokemon Evolution</h1>
+        <button
+          className="login"
+          onClick={() => {
+            navigate("/login");
+          }}
+        >login
+        </button>
+     </header>
+      <ul className="all-container">
+        {pokemonList.map((pokemon: any, index: number) => (
+          <PokeList key={index} url={pokemon.url} />
           // pokemon.url
         ))}
       </ul>
