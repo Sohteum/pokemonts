@@ -3,16 +3,33 @@ import { Link } from "react-router-dom";
 
 // { setModalOpen }: { setModalOpen: React.Dispatch<React.SetStateAction<boolean>>}
 
-const PokeDetails = () => {
+
+
+// interface IpokemonData {
+//   name: string;
+//   type: string;
+//   id: number;
+//   image: string;
+// }
+
+
+const PokeDetails = ({ data }:{data:any}) => {
   // const modalClose = () => {
   //   setModalOpen(false);
   // };
-
-
+console.log(data,'tt')
   return (
-    <div className="modalOpen" >
-      <Link to='/'>details modal</Link>
-      
+    <div>
+      <Link to="/">
+        <div className="modalOpen">
+         
+            <p className="number">#Id: {data.id}</p>
+            <img className="image" src={data.image} alt={data.name} />
+            <p>타입{data.type}</p>
+            <p className="name">이름{data.name}</p>
+         
+        </div>
+      </Link>
     </div>
   );
 };

@@ -51,22 +51,10 @@ const App = () => {
         ))}
       </ul>
 
-      <div
-        className="modal"
-        style={{
-          position: "absolute",
-          // display:"none",
-          top: "200px",
-          left: "200px",
-          // height: "600px",
-          // width:"750px",
-          // backgroundColor: "#ffdfe5",
-          // borderRadius: "30px",
-          // zIndex: "999",
-        }}
-        >
-        {detailName === name && <PokeDetails />}
-      </div>
+    
+
+        {detailName === name && <PokeDetails data={pokemonList}/>}
+     
     </div>
   );
 };

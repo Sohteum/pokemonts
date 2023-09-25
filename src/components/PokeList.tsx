@@ -58,7 +58,7 @@ const PokeList = ({ url }: { url: string }) => {
        <p className="number">#Id: {data.id}</p>
        <img className="image" src={data.image} alt={data.name} />
        <p>{data.type}</p>
-       <span className="name">{data.name}</span>
+       <p className="name">{data.name}</p>
      </li>
     </Link>
 
