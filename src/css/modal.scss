@@ -8,3 +8,12 @@
     background-color: rgb(255, 205, 185);
     border-radius: 30px;
 }
+
+.close >i {
+    display: flex;
+    justify-content: end;
+    font-size: 3rem;
+    box-sizing: border-box;
+    margin: 20px;
+    color: rgba(0,0,0,0.5);
+}

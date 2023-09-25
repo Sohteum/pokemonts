@@ -22,7 +22,7 @@ console.log(data,'tt')
     <div>
       <Link to="/">
         <div className="modalOpen">
-         
+         <div className="close"><i className="fa-solid fa-circle-xmark"></i></div>
             <p className="number">#Id: {data.id}</p>
             <img className="image" src={data.image} alt={data.name} />
             <p>타입{data.type}</p>
