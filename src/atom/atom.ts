@@ -6,3 +6,7 @@ export const LoginStateAtom = atom({
     default: false,
 })
 
+export const PokemonNameAtom = atom<string>({ 
+    key: 'PokemonNameAtom',
+    default: '',
+})

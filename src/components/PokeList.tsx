@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import PokeDetails from "./PokeDetails";
+import { Link } from "react-router-dom";
+import { PokemonNameAtom } from "../atom/atom";
+import { useSetRecoilState } from "recoil";
 
 
 interface IpokemonData {
@@ -14,7 +17,8 @@ const PokeList = ({ url }: { url: string }) => {
 
   const [data, setData] = useState<IpokemonData>(); // 스테이트에서 타입설정하기 확인
   const [loading, setLoading] = useState<boolean>(true);
-  const navigate = useNavigate()
+  const [modalOpen, setModalOpen] = useState<boolean>(false)
+  const setName = useSetRecoilState(PokemonNameAtom)
 
   useEffect(() => {
     axios
@@ -40,18 +44,26 @@ const PokeList = ({ url }: { url: string }) => {
   //null값이 나올수 있기 때문에 data
 
 
-  const onClickHandler = () => {
-    navigate("/Details")
+  const showModal = () => {
+    setModalOpen(true)
+    setName(data.name)
   }
 
 
   return (
-    <li className="thumb-container detail-wrapper" onClick={onClickHandler}>
-      <p className="number">#Id: {data.id}</p>
-      <img className="image" src={data.image} alt={data.name} />
-      <p>{data.type}</p>
-      <span className="name">{data.name}</span>
-    </li>
+    
+    <Link to={data.name} onClick={showModal}>
+       
+       <li className="thumb-container detail-wrapper" >
+       <p className="number">#Id: {data.id}</p>
+       <img className="image" src={data.image} alt={data.name} />
+       <p>{data.type}</p>
+       <span className="name">{data.name}</span>
+     </li>
+    </Link>
+
+
+
   );
 };
 

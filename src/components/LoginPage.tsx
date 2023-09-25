@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
   //   // const [IsLogged, setIsLogged] = useRecoilState(LoginStateAtom);
@@ -56,57 +57,55 @@ const LoginPage = () => {
   //   );
   // };
 
-//   const [userName, setUserName] = useRecoilState(LoginStateAtom);
-//   // useSetRecoilState : 상태를 업데이트하는 setter 함수.
-//   // 현재 로그인한 userName을 전역으로 관리한다.
-//   const [input, setInput] = useState("");
-//   const [state, setState] = useState({
-//     isLogined: false,
-//     userName: "",
-//   });
-//   const loginText = state.isLogined ? "LOGOUT" : "LOGIN";
+  //   const [userName, setUserName] = useRecoilState(LoginStateAtom);
+  //   // useSetRecoilState : 상태를 업데이트하는 setter 함수.
+  //   // 현재 로그인한 userName을 전역으로 관리한다.
+  //   const [input, setInput] = useState("");
+  //   const [state, setState] = useState({
+  //     isLogined: false,
+  //     userName: "",
+  //   });
+  //   const loginText = state.isLogined ? "LOGOUT" : "LOGIN";
 
-//   function onChangeInputHandler(e: any) {
-//     const text = e.target.value;
-//     setInput(text);
-//   }
+  //   function onChangeInputHandler(e: any) {
+  //     const text = e.target.value;
+  //     setInput(text);
+  //   }
 
-//   function onClickSubmitHandler(e: any) {
-//     e.preventDefault();
-//     if (!state.isLogined) {
-//       setState({
-//         userName: input,
-//         isLogined: true,
-//       });
-//       setUserName(userName);
-//       return;
-//     }
-//     setState({
-//       isLogined: false,
-//       userName: "",
-//     });
-//   }
+  //   function onClickSubmitHandler(e: any) {
+  //     e.preventDefault();
+  //     if (!state.isLogined) {
+  //       setState({
+  //         userName: input,
+  //         isLogined: true,
+  //       });
+  //       setUserName(userName);
+  //       return;
+  //     }
+  //     setState({
+  //       isLogined: false,
+  //       userName: "",
+  //     });
+  //   }
 
-//   const inputText = <input type="text" onChange={onChangeInputHandler} />;
+  //   const inputText = <input type="text" onChange={onChangeInputHandler} />;
 
+  //   return (
+  //     <div>
+  //       <form>
+  //         {state.isLogined ? <h2>{state.userName}</h2> : inputText}
+  //         <button type="button" onClick={onClickSubmitHandler}>
+  //           {loginText}
+  //         </button>
+  //       </form>
+  //     </div>
+  //   );
+  // };
 
-  
-
-//   return (
-//     <div>
-//       <form>
-//         {state.isLogined ? <h2>{state.userName}</h2> : inputText}
-//         <button type="button" onClick={onClickSubmitHandler}>
-//           {loginText}
-//         </button>
-//       </form>
-//     </div>
-//   );
-// };
-
-const [username, setUsername] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const navi = useNavigate();
 
   // 로그인 상태 유지를 위한 useEffect
   useEffect(() => {
@@ -122,6 +121,7 @@ const [username, setUsername] = useState("");
     // 여기에서는 간단히 localStorage를 사용하여 로그인 상태를 유지합니다.
     localStorage.setItem("username", username);
     setIsLoggedIn(true);
+    navi("/"); //홈으로 이동
   };
 
   const handleLogout = () => {
@@ -129,6 +129,7 @@ const [username, setUsername] = useState("");
     localStorage.removeItem("username");
     setIsLoggedIn(false);
     setUsername("");
+    navi("/"); //홈으로 이동
   };
 
   return (

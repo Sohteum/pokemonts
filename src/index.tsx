@@ -2,21 +2,27 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import {  createBrowserRouter, RouterProvider } from 'react-router-dom';
 import App from './App';
+import PokeDetails from './components/PokeDetails';
 import LoginPage from './components/LoginPage';
 import "./css/style.css";
 import "./css/login.css";
+import "./css/modal.css";
 import CompHeader from './components/CompHeader';
 import {
   RecoilRoot,
- 
+  
 } from 'recoil'
 import PokeList from './components/PokeList';
-import PokeDetails from './components/PokeDetails';
 const url = 'sdf';//...?
+// const setModalOpen = 'sdf';//...?
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />
+    element: <App />, 
+    children: [{
+      path: ":Details",
+      element: <App />
+    }]
   },
   {
     path: "/header",
@@ -30,10 +36,10 @@ const router = createBrowserRouter([
     path: "/login",
     element: <LoginPage />
   },
-  {
-    path: "/Details",
-    element: <PokeDetails />
-  }
+  // {
+  //   path: "/Details",
+  //   element: <PokeDetails />
+  // }
 
 ]);
 
@@ -43,3 +49,24 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
  </RecoilRoot>
 );
 
+
+// .  {
+//   path: "/",
+//   element: <App />, 
+//   children: [{
+//     path: ":Details",
+//     element: <App />
+//   }]
+// },
+// {
+//   path: "/header",
+//   element: <CompHeader />
+// },
+// {
+//   path: "/PokeList",
+//   element: <PokeList url={url} />
+// },
+// {
+//   path: "/login",
+//   element: <LoginPage />
+// },

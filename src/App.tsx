@@ -1,15 +1,21 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import PokeList from "./components/PokeList";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import PokeDetails from "./components/PokeDetails";
+import { useRecoilState } from "recoil";
+import { PokemonNameAtom } from "./atom/atom";
 
 const App = () => {
   const [pokemonList, setPokemonList] = useState([]);
   const [loading, setLoading] = useState(true);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const [name, setName] = useRecoilState(PokemonNameAtom);
+  const location = useLocation();
+  const detailName = location.pathname.split("/")[1];
 
   useEffect(() => {
-    const apiUrl = "https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0n";
+    const apiUrl = "https://pokeapi.co/api/v2/pokemon";
 
     axios
       .get(apiUrl)
@@ -22,28 +28,45 @@ const App = () => {
         setLoading(false);
       });
   }, []);
-  // console.log(pokemonList,'aa')
 
   if (loading) return <div>Loading...</div>;
 
   return (
     <div className="pokemon-container">
-     <header>
+      <header>
         <h1>Pokemon Evolution</h1>
         <button
           className="login"
           onClick={() => {
             navigate("/login");
           }}
-        >login
+        >
+          login
         </button>
-     </header>
+      </header>
       <ul className="all-container">
         {pokemonList.map((pokemon: any, index: number) => (
           <PokeList key={index} url={pokemon.url} />
           // pokemon.url
         ))}
       </ul>
+
+      <div
+        className="modal"
+        style={{
+          position: "absolute",
+          // display:"none",
+          top: "200px",
+          left: "200px",
+          // height: "600px",
+          // width:"750px",
+          // backgroundColor: "#ffdfe5",
+          // borderRadius: "30px",
+          // zIndex: "999",
+        }}
+        >
+        {detailName === name && <PokeDetails />}
+      </div>
     </div>
   );
 };
