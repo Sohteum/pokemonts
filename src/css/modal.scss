@@ -1,8 +1,8 @@
 .modalOpen{
-    position: absolute;
+    position: fixed;
     top: 50vh;
     left: 50vw;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%,-50%);
     width: 500px;
     height: 600px;
     background-color: rgb(255, 205, 185);
@@ -10,7 +10,6 @@
 }
 
 .close >i {
-    display: flex;
     justify-content: end;
     font-size: 3rem;
     box-sizing: border-box;

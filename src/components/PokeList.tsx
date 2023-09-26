@@ -2,67 +2,66 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import PokeDetails from "./PokeDetails";
 import { Link } from "react-router-dom";
-import { PokemonNameAtom } from "../atom/atom";
-import { useSetRecoilState } from "recoil";
+import { IpokemonData, IpokemonDataAtom, PokemonIdAtom, PokemonNameAtom, modalAtom } from "../atom/atom";
+import { useRecoilState, useSetRecoilState } from "recoil";
 
 
-interface IpokemonData {
-  name: string;
-  type: string;
-  id: number;
-  image: string;
-}
+
 
 const PokeList = ({ url }: { url: string }) => {
 
-  const [data, setData] = useState<IpokemonData>(); // 스테이트에서 타입설정하기 확인
+  const [data, setData] = useRecoilState(IpokemonDataAtom); // 스테이트에서 타입설정하기 확인
+  const [list, setList] = useState<IpokemonData | undefined>(); // 스테이트에서 타입설정하기 확인
   const [loading, setLoading] = useState<boolean>(true);
-  const [modalOpen, setModalOpen] = useState<boolean>(false)
+  const [modalOpen, setModalOpen] = useRecoilState(modalAtom)
   const setName = useSetRecoilState(PokemonNameAtom)
+
 
   useEffect(() => {
     axios
       .get(url)
       .then((response) => {
-        setData({
+        setList({
           name: response.data.name,
           type: response.data.types[0].type.name,
           image: response.data.sprites.front_default,
           id: response.data.id,
         });
-        setLoading(false);
+        setLoading(false);    
       })
       .catch((error) => {
         console.error("Error fetching Pokemon details:", error);
         setLoading(false);
       });
-  }, [url]);
+  }, []);
 
   if (loading) return <li>Loading...</li>;
+
+
 
   if (data == null) return <li>null Data...</li>;
   //null값이 나올수 있기 때문에 data
 
 
-  const showModal = () => {
+  const showModal = (e:React.MouseEvent<HTMLAnchorElement>,  id:number, image:string, type:string, name:string) => {
     setModalOpen(true)
-    setName(data.name)
   }
-
-
+  
+  
   return (
-    
-    <Link to={data.name} onClick={showModal}>
-       
+    <>
+  
+    <Link to={list!.name} onClick={(e)=>showModal(e, list!.id, list!.image, list!.type, list!.name) }>       
        <li className="thumb-container detail-wrapper" >
-       <p className="number">#Id: {data.id}</p>
-       <img className="image" src={data.image} alt={data.name} />
-       <p>{data.type}</p>
-       <p className="name">{data.name}</p>
+       <p className="number">#Id: {list!.id}</p>
+       <img className="image" src={list!.image} alt={list!.name} />
+       <p>{list!.type}</p>
+       <p className="name">{list!.name}</p>
      </li>
     </Link>
 
-
+    { modalOpen && (<PokeDetails id={ list!.id } image={ list!.image} type={list!.type} name={list!.name} />)}
+  </>
 
   );
 };

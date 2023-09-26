@@ -1,36 +1,37 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { IpokemonData, modalAtom } from "../atom/atom";
+import styled from "styled-components";
+import { useRecoilState, useSetRecoilState } from "recoil";
 
-// { setModalOpen }: { setModalOpen: React.Dispatch<React.SetStateAction<boolean>>}
-
-
-
-// interface IpokemonData {
-//   name: string;
-//   type: string;
-//   id: number;
-//   image: string;
-// }
+const ModalList = styled.div`
+z-index:9999;
+`
 
 
-const PokeDetails = ({ data }:{data:any}) => {
+const PokeDetails = ({ id, image, type, name } : {id:number, image:string, type:string, name:string}) => {
   // const modalClose = () => {
   //   setModalOpen(false);
   // };
-console.log(data,'tt')
+
+  const setModalOpen = useSetRecoilState(modalAtom)
+  const fnClose = () => {
+    setModalOpen(false)
+  }
+
   return (
-    <div>
+    <ModalList id="ModalList">
       <Link to="/">
         <div className="modalOpen">
-         <div className="close"><i className="fa-solid fa-circle-xmark"></i></div>
-            <p className="number">#Id: {data.id}</p>
-            <img className="image" src={data.image} alt={data.name} />
-            <p>타입{data.type}</p>
-            <p className="name">이름{data.name}</p>
+         <div className="close" onClick={fnClose}><i className="fa-solid fa-circle-xmark"></i></div>
+            <p className="number">#Id: {id}</p>
+            <img className="image" src={image} alt={name} />
+            <p>타입{type}</p>
+            <p className="name">이름{name}</p>
          
         </div>
       </Link>
-    </div>
+    </ModalList>
   );
 };
 

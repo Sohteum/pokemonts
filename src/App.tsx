@@ -4,7 +4,7 @@ import PokeList from "./components/PokeList";
 import { useLocation, useNavigate } from "react-router-dom";
 import PokeDetails from "./components/PokeDetails";
 import { useRecoilState } from "recoil";
-import { PokemonNameAtom } from "./atom/atom";
+import { IpokemonDataAtom, PokemonNameAtom, modalAtom } from "./atom/atom";
 
 const App = () => {
   const [pokemonList, setPokemonList] = useState([]);
@@ -14,14 +14,17 @@ const App = () => {
   const location = useLocation();
   const detailName = location.pathname.split("/")[1];
 
+  const [data, setData] = useRecoilState(IpokemonDataAtom);
   useEffect(() => {
     const apiUrl = "https://pokeapi.co/api/v2/pokemon";
+
 
     axios
       .get(apiUrl)
       .then((response) => {
         setPokemonList(response.data.results);
         setLoading(false);
+        console.log(response.data.results, "response.data.results")
       })
       .catch((error) => {
         console.error("Error fetching Pokemon list:", error);
@@ -30,6 +33,7 @@ const App = () => {
   }, []);
 
   if (loading) return <div>Loading...</div>;
+  console.log(pokemonList.length, "length")
 
   return (
     <div className="pokemon-container">
@@ -45,15 +49,12 @@ const App = () => {
         </button>
       </header>
       <ul className="all-container">
-        {pokemonList.map((pokemon: any, index: number) => (
-          <PokeList key={index} url={pokemon.url} />
-          // pokemon.url
+        {pokemonList?.map((pokemon: any, index: number) => (                  
+          <PokeList key={index} url={pokemon.url} />                    
         ))}
       </ul>
 
-    
 
-        {detailName === name && <PokeDetails data={pokemonList}/>}
      
     </div>
   );
