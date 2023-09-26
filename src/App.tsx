@@ -9,10 +9,13 @@ import { PokemonNameAtom } from "./atom/atom";
 const App = () => {
   const [pokemonList, setPokemonList] = useState([]);
   const [loading, setLoading] = useState(true);
-  const navigate = useNavigate();
   const [name, setName] = useRecoilState(PokemonNameAtom);
+  const [search, setSearch] = useState("")
+
   const location = useLocation();
+  const navigate = useNavigate();
   const detailName = location.pathname.split("/")[1];
+
 
   useEffect(() => {
     const apiUrl = "https://pokeapi.co/api/v2/pokemon";
@@ -29,6 +32,16 @@ const App = () => {
       });
   }, []);
 
+  const searchHandler = (e:any) => {
+    e.prevent.default();
+    setSearch(e.target.value)
+  };
+
+  const onSearch =(e:any)=>{
+    e.prevent.default();
+    if(search ===null || search=== '')
+  }
+
   if (loading) return <div>Loading...</div>;
 
   return (
@@ -43,6 +56,16 @@ const App = () => {
         >
           login
         </button>
+        {/* <div style={{height:"30px"}}></div> */}
+        <form onSubmit={onSearch}>
+          <input
+            type="text"
+            className="search-input"
+            size={30}
+            onChange={searchHandler}
+          />
+          <button type="submit">검색</button>
+        </form>
       </header>
       <ul className="all-container">
         {pokemonList.map((pokemon: any, index: number) => (
@@ -51,10 +74,7 @@ const App = () => {
         ))}
       </ul>
 
-    
-
-        {detailName === name && <PokeDetails data={pokemonList}/>}
-     
+      {detailName === name && <PokeDetails listDb={pokemonList} />}
     </div>
   );
 };
