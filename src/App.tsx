@@ -10,8 +10,8 @@ const App = () => {
   const [pokemonList, setPokemonList] = useState([]);
   const [loading, setLoading] = useState(true);
   const [name, setName] = useRecoilState(PokemonNameAtom);
-  const [userInput, setUserInput] = useState("");
-  const [search, setSearch] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -32,17 +32,20 @@ const App = () => {
       });
   }, []);
 
-  const searchHandler = (e: any) => {
-    e.prevent.default();
-    setUserInput(e.target.value.toLowerCase());
+  const handleSearch = async () => {
+    try {
+      // Pokemon 정보를 불러올 API 엔드포인트
+      const apiUrl = `https://pokeapi.co/api/v2/pokemon/${searchTerm}`;
+
+      // API 요청을 보내서 데이터 가져오기
+      const response = await axios.get(apiUrl);
+
+      // 가져온 데이터를 검색 결과로 설정
+      setSearchResults([response.data]);
+    } catch (error) {
+      console.error("Error fetching Pokemon data:", error);
+    }
   };
-
-  // const searched = pokemonList.filter((item) =>
-  //   item.name.toLowerCase().includes(userInput)
-  // );
-
-  const onSearch = (e: any) => {};
-
 
   if (loading) return <div>Loading...</div>;
 
@@ -59,15 +62,14 @@ const App = () => {
           login
         </button>
         {/* <div style={{height:"30px"}}></div> */}
-        <form onSubmit={onSearch}>
-          <input
-            type="text"
-            className="search-input"
-            size={30}
-            onChange={searchHandler}
-          />
-          <button type="submit">검색</button>
-        </form>
+
+        <input
+          type="text"
+          placeholder="Pokemon 이름을 입력하세요"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)} // 입력값 변경 시 상태 업데이트
+        />
+        <button onClick={handleSearch}>검색</button>
       </header>
       <ul className="all-container">
         {pokemonList.map((pokemon: any, index: number) => (
