@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import axios, { Axios } from "axios";
 import PokeList from "./components/PokeList";
 import { useLocation, useNavigate } from "react-router-dom";
 import PokeDetails from "./components/PokeDetails";
@@ -10,12 +10,12 @@ const App = () => {
   const [pokemonList, setPokemonList] = useState([]);
   const [loading, setLoading] = useState(true);
   const [name, setName] = useRecoilState(PokemonNameAtom);
-  const [search, setSearch] = useState("")
+  const [userInput, setUserInput] = useState("");
+  const [search, setSearch] = useState("");
 
   const location = useLocation();
   const navigate = useNavigate();
   const detailName = location.pathname.split("/")[1];
-
 
   useEffect(() => {
     const apiUrl = "https://pokeapi.co/api/v2/pokemon";
@@ -32,15 +32,17 @@ const App = () => {
       });
   }, []);
 
-  const searchHandler = (e:any) => {
+  const searchHandler = (e: any) => {
     e.prevent.default();
-    setSearch(e.target.value)
+    setUserInput(e.target.value.toLowerCase());
   };
 
-  const onSearch =(e:any)=>{
-    e.prevent.default();
-    if(search ===null || search=== '')
-  }
+  // const searched = pokemonList.filter((item) =>
+  //   item.name.toLowerCase().includes(userInput)
+  // );
+
+  const onSearch = (e: any) => {};
+
 
   if (loading) return <div>Loading...</div>;
 
