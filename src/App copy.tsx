@@ -13,18 +13,6 @@ interface Iresults {
   url: string;
 }
 
-// const SetUser = ()=>{
-//   let user = localStorage.getItem('localStorageUser')
-
-//   if(user){
-//     return JSON.parse(user)
-//   }else{
-//     return null
-//   }
-
-// }
-
-
 function App() {
 
 const LoginState = useRecoilState(LoginStateAtom)
