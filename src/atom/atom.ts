@@ -27,7 +27,6 @@ export interface IpokemonData {
   }
 
 
-  
 
 export const IpokemonDataAtom = atom<IpokemonData>({ 
     key: 'PokemonIdAtom',
@@ -43,4 +42,9 @@ export const IpokemonDataAtom = atom<IpokemonData>({
 export const modalAtom = atom<boolean>({
     key:"modalAtomState",
     default: false
+})
+
+export const pokemonListAtom = atom({
+    key:"pokemonListState",
+    default: {}
 })

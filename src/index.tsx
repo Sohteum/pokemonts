@@ -13,7 +13,7 @@ import {
   
 } from 'recoil'
 import PokeList from './components/PokeList';
-const url = 'sdf';//...?
+// const url = 'sdf';//...?
 // const setModalOpen = 'sdf';//...?
 const router = createBrowserRouter([
   {

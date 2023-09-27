@@ -4,11 +4,12 @@ import PokeList from "./components/PokeList";
 import { useLocation, useNavigate } from "react-router-dom";
 import PokeDetails from "./components/PokeDetails";
 import { useRecoilState } from "recoil";
-import { IpokemonDataAtom, PokemonNameAtom, modalAtom } from "./atom/atom";
+import { IpokemonDataAtom, PokemonNameAtom, modalAtom, pokemonListAtom } from "./atom/atom";
 
 const App = () => {
   const [pokemonList, setPokemonList] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [url, setUrl] = useRecoilState(pokemonListAtom);
   const navigate = useNavigate();
   const [name, setName] = useRecoilState(PokemonNameAtom);
   const location = useLocation();

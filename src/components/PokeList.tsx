@@ -2,15 +2,16 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import PokeDetails from "./PokeDetails";
 import { Link } from "react-router-dom";
-import { IpokemonData, IpokemonDataAtom, PokemonIdAtom, PokemonNameAtom, modalAtom } from "../atom/atom";
+import { IpokemonData, IpokemonDataAtom, PokemonIdAtom, PokemonNameAtom, modalAtom, pokemonListAtom } from "../atom/atom";
 import { useRecoilState, useSetRecoilState } from "recoil";
 
 
 
 
-const PokeList = ({ url }: { url: string }) => {
+const PokeList = () => {
 
-  const [data, setData] = useRecoilState(IpokemonDataAtom); // 스테이트에서 타입설정하기 확인
+  const [url, setUrl] = useRecoilState(pokemonListAtom);
+    const [data, setData] = useRecoilState(IpokemonDataAtom); // 스테이트에서 타입설정하기 확인
   const [list, setList] = useState<IpokemonData | undefined>(); // 스테이트에서 타입설정하기 확인
   const [loading, setLoading] = useState<boolean>(true);
   const [modalOpen, setModalOpen] = useRecoilState(modalAtom)
