@@ -8,9 +8,9 @@ import { useRecoilState, useSetRecoilState } from "recoil";
 
 
 
-const PokeList = () => {
+const PokeList = ({url}:{url:any}) => {
 
-  const [url, setUrl] = useRecoilState(pokemonListAtom);
+  // const [url, setUrl] = useRecoilState(pokemonListAtom);
     const [data, setData] = useRecoilState(IpokemonDataAtom); // 스테이트에서 타입설정하기 확인
   const [list, setList] = useState<IpokemonData | undefined>(); // 스테이트에서 타입설정하기 확인
   const [loading, setLoading] = useState<boolean>(true);

@@ -9,7 +9,7 @@ import { IpokemonDataAtom, PokemonNameAtom, modalAtom, pokemonListAtom } from ".
 const App = () => {
   const [pokemonList, setPokemonList] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [url, setUrl] = useRecoilState(pokemonListAtom);
+  // const [url, setUrl] = useRecoilState(pokemonListAtom);
   const navigate = useNavigate();
   const [name, setName] = useRecoilState(PokemonNameAtom);
   const location = useLocation();

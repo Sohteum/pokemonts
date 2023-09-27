@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import {  createBrowserRouter, RouterProvider } from 'react-router-dom';
 import App from './App';
-import PokeDetails from './components/PokeDetails';
 import LoginPage from './components/LoginPage';
 import "./css/style.css";
 import "./css/login.css";
@@ -13,7 +12,7 @@ import {
   
 } from 'recoil'
 import PokeList from './components/PokeList';
-// const url = 'sdf';//...?
+const url = 'sdf';//...?
 // const setModalOpen = 'sdf';//...?
 const router = createBrowserRouter([
   {
