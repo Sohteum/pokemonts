@@ -39,7 +39,7 @@ const App = () => {
     <div className="pokemon-container">
       <header>
         <h1>Pokemon Evolution</h1>
-        <input
+        {/* <input
         type="texy"
         placeholder="Search"
         onChange={(e) => {
@@ -55,7 +55,7 @@ const App = () => {
         }).map(data =>{
           return <p>{pokemonList.value}</p>
         })}
-      />
+      /> */}
           {/* 여기서  filter와 map사용법을 잘 모르겠다.*/}
         <button
           className="login"
